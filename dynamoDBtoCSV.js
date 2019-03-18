@@ -44,6 +44,7 @@ if (program.profile) {
   var newCreds = new AWS.SharedIniFileCredentials({ profile: program.profile });
   newCreds.profile = program.profile;
   AWS.config.update({ credentials: newCreds });
+  console.log(`Using profile "${newCreds.profile}"`)
 }
 
 if (program.envcreds) {
@@ -65,6 +66,8 @@ var query = {
   TableName: program.table,
   Limit: 1000
 };
+
+console.log(`Running query for table "${query.TableName}" (limit "${query.Limit}")`)
 
 var describeTable = function(query) {
   dynamoDB.describeTable(
